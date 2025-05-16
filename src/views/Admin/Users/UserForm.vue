@@ -3,15 +3,31 @@
     <b-row>
       <b-col
         cols="12"
-        md="6"
+        md="3"
       >
         <user-name />
+      </b-col>
+      <b-col
+        cols="12"
+        md="3"
+      >
+        <user-last-name />
       </b-col>
       <b-col
         cols="12"
         md="6"
       >
         <user-email />
+      </b-col>
+      <b-col
+        cols="12"
+        md="6"
+      />
+      <b-col
+        cols="12"
+        md="6"
+      >
+        <password-checkbox />
       </b-col>
       <b-col
         cols="12"
@@ -23,10 +39,11 @@
         cols="12"
         md="6"
       >
-        <user-status />
+
+        <user-password />
       </b-col>
     </b-row>
-    <user-password />
+
   </b-card>
 </template>
 
@@ -36,11 +53,14 @@ import UserName from '@/views/Admin/Users/elements/UserName.vue'
 import UserEmail from '@/views/Admin/Users/elements/UserEmail.vue'
 import UserPassword from '@/views/Admin/Users/elements/UserPassword.vue'
 import UserType from '@/views/Admin/Users/elements/UserType.vue'
-import UserStatus from '@/views/Admin/Users/elements/UserStatus.vue'
+import UserLastName from '@/views/Admin/Users/elements/UserLastName.vue'
+import PasswordCheckbox from '@/views/Admin/Users/elements/checkBox.vue'
 
 export default {
   name: 'UserForm',
   components: {
+    PasswordCheckbox,
+    UserLastName,
     BCard,
     BRow,
     BCol,
@@ -48,7 +68,7 @@ export default {
     UserEmail,
     UserPassword,
     UserType,
-    UserStatus,
+
   },
 }
 </script>

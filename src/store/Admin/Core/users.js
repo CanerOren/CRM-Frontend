@@ -1,12 +1,29 @@
 import axiosIns from '@/libs/axios'
 
-const ROOT_URL = '/Admin/core/users'
+const ROOT_URL = '/core/users'
 export default {
   namespaced: true,
   state: {
     dataList: [],
     dataCounts: 0,
-    dataItem: {},
+    dataItem: {
+      name: null,
+      id_user_types: null,
+      lastname: null,
+      id_updated_by: null,
+      updated_at: null,
+      id_created_by: null,
+      created_at: null,
+      email: null,
+      id: null,
+      phone: null,
+      deleted_at: null,
+      password: null,
+      token: null,
+      acces_token: null,
+      refresh_token: null,
+      download_token: null,
+    },
     dataSave: {
       message: null,
       status: null,
@@ -48,7 +65,24 @@ export default {
       state.dataSave = data
     },
     RESET_DATA_ITEM(state) {
-      state.dataItem = {}
+      state.dataItem = {
+        name: null,
+        id_user_types: null,
+        lastname: null,
+        id_updated_by: null,
+        updated_at: null,
+        id_created_by: null,
+        created_at: null,
+        email: null,
+        id: null,
+        phone: null,
+        deleted_at: null,
+        password: null,
+        token: null,
+        acces_token: null,
+        refresh_token: null,
+        download_token: null,
+      }
     },
     AUTH_FORGOT(state, data) {
       state.forgotResult = data
@@ -56,40 +90,25 @@ export default {
   },
   actions: {
     getDataList({ commit }, params) {
-      const data = JSON.stringify(params)
       axiosIns
-        .post(ROOT_URL, data)
+        .post(ROOT_URL, params)
         .then(response => {
           commit('SET_DATA_LIST', response.data.data)
-          commit('SET_DATA_COUNTS', response.data.count)
+          commit('SET_DATA_COUNTS', response.data.dataCount)
         })
         .catch(error => console.error(error))
     },
     getDataItem({ commit }, id) {
-      const data = JSON.stringify({
-        select: [
-          'users.id AS id',
-          'users.name AS name',
-          'users.email AS email',
-          'users.status AS status',
-          'users.id_user_types AS id_user_types',
-        ],
-        where: {
-          'users.id': id,
-        },
-        array: false,
-      })
       axiosIns
-        .post(ROOT_URL, data)
+        .post(`${ROOT_URL}/getRow`, { id })
         .then(response => {
           commit('SET_DATA_ITEM', response.data.data)
         })
         .catch(error => console.error(error))
     },
     saveData({ commit }, postData) {
-      const data = JSON.stringify(postData)
       axiosIns
-        .post(`${ROOT_URL}/saveData`, data)
+        .post(`${ROOT_URL}/createData`, postData)
         .then(response => {
           commit('SET_DATA_SAVE', response.data)
         })
@@ -97,7 +116,7 @@ export default {
     },
     removeData({ commit }, id) {
       axiosIns
-        .post(`${ROOT_URL}/deleteData`, { id })
+        .post(`${ROOT_URL}/removeData`, { id })
         .then(response => {
           commit('SET_DATA_SAVE', response.data)
         })

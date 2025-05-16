@@ -23,6 +23,19 @@
           />
         </div>
       </template>
+      <template #cell(created_by)="data">
+        <div v-if="data.item.created_by">
+          {{ data.item.created_by.name }} {{ data.item.created_by.lastname }}
+        </div>
+      </template>
+      <template #cell(updated_by)="data">
+        <div v-if="data.item.updated_by">
+          {{ data.item.updated_by.name }} {{ data.item.updated_by.lastname }}
+        </div>
+      </template>
+      <template #cell(created_at)="data">
+        {{ formatDate(data.item.created_at) }}
+      </template>
     </b-table>
     <b-card-footer>
       <b-pagination
@@ -56,8 +69,8 @@ import {
 } from 'bootstrap-vue'
 import ListButtons from '@/layouts/components/common/ListButtons.vue'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+import moment from 'moment'
 
-const tableName = 'user_types'
 export default {
   name: 'Index',
   components: {
@@ -79,18 +92,48 @@ export default {
           label: 'Başlık',
         },
         {
+          key: 'created_by',
+          label: 'Oluşturanın Adı',
+        },
+        {
+          key: 'updated_by',
+          label: 'Güncelleyenin Adı',
+        },
+        {
+          key: 'created_at',
+          label: 'Oluşturulduğu Tarih',
+        },
+        {
           key: 'control',
           label: '',
           thStyle: { width: '200px' },
         },
       ],
       dataQuery: {
-        select: [
-          `${tableName}.id AS id`,
-          `${tableName}.title AS title`,
-        ],
-        limit: this.$store.state.app.perPage,
-        start: 0,
+        select: {
+          id: true,
+          title: true,
+          id_created_by: true,
+          created_by: {
+            select: {
+              name: true,
+              lastname: true,
+            },
+          },
+          id_updated_by: true,
+          updated_by: {
+            select: {
+              name: true,
+              lastname: true,
+            },
+          },
+          created_at: true,
+          updated_at: true,
+          deleted_at: true,
+          role: true,
+        },
+        take: this.$store.state.app.perPage,
+        skip: 0,
       },
     }
   },
@@ -168,6 +211,9 @@ export default {
           variant: params.variant,
         },
       })
+    },
+    formatDate(date) {
+      return moment(date).format('DD-MM-YYYY HH:mm')
     },
   },
 }

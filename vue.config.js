@@ -45,4 +45,22 @@ module.exports = {
       })
   },
   transpileDependencies: ['vue-echarts', 'resize-detector'],
+  pwa: {
+    name: 'VuePWAApp',
+    themeColor: '#42b983',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+    manifestOptions: {
+      short_name: 'VuePWA',
+      start_url: '.',
+      display: 'standalone',
+      background_color: '#ffffff',
+    },
+    workboxPluginMode: 'GenerateSW', // veya InjectManifest
+    workboxOptions: {
+      skipWaiting: true,
+      clientsClaim: true,
+    },
+  },
 }

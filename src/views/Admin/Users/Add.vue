@@ -47,6 +47,7 @@ export default {
         this.showToast({
           variant: 'danger', title: 'İşlem Hatası!', icon: 'XIcon', text: val.message,
         })
+        this.submitStatus = false
       }
     },
   },

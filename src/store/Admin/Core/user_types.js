@@ -1,14 +1,19 @@
 import axiosIns from '@/libs/axios'
 
-const ROOT_URL = '/Admin/core/user_types'
+const ROOT_URL = '/defines/user_types'
 export default {
   namespaced: true,
   state: {
     dataList: [],
     dataCounts: 0,
     dataItem: {
-      id: null,
       title: null,
+      id_created_by: null,
+      id_updated_by: null,
+      created_at: null,
+      updated_at: null,
+      deleted_at: null,
+      role: null,
       user_type_ability: [],
     },
     dataSave: {
@@ -46,17 +51,21 @@ export default {
     },
     RESET_DATA_ITEM(state) {
       state.dataItem = {
-        id: null,
         title: null,
+        id_created_by: null,
+        id_updated_by: null,
+        created_at: null,
+        updated_at: null,
+        deleted_at: null,
+        role: null,
         user_type_ability: [],
       }
     },
   },
   actions: {
     getDataList({ commit }, params) {
-      const data = JSON.stringify(params)
       axiosIns
-        .post(ROOT_URL, data)
+        .post(ROOT_URL, params)
         .then(response => {
           commit('SET_DATA_LIST', response.data.data)
           commit('SET_DATA_COUNTS', response.data.count)
@@ -64,23 +73,16 @@ export default {
         .catch(error => console.error(error))
     },
     getDataItem({ commit }, id) {
-      const data = JSON.stringify({
-        where: {
-          'user_types.id': id,
-        },
-        array: false,
-      })
       axiosIns
-        .post(ROOT_URL, data)
+        .post(`${ROOT_URL}/getRow`, { id })
         .then(response => {
           commit('SET_DATA_ITEM', response.data.data)
         })
         .catch(error => console.error(error))
     },
     saveData({ commit }, postData) {
-      const data = JSON.stringify(postData)
       axiosIns
-        .post(`${ROOT_URL}/saveData`, data)
+        .post(`${ROOT_URL}/createData`, postData)
         .then(response => {
           commit('SET_DATA_SAVE', response.data)
         })
@@ -88,7 +90,7 @@ export default {
     },
     removeData({ commit }, id) {
       axiosIns
-        .post(`${ROOT_URL}/deleteData`, { id })
+        .post(`${ROOT_URL}/removeData`, { id })
         .then(response => {
           commit('SET_DATA_SAVE', response.data)
         })

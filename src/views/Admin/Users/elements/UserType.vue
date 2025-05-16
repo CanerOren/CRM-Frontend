@@ -55,10 +55,10 @@ export default {
   methods: {
     getUserTypes() {
       this.$store.dispatch('userTypes/getDataList', {
-        select: [
-          'user_types.id AS id',
-          'user_types.title AS title',
-        ],
+        select: {
+          id: true,
+          title: true,
+        },
       })
     },
   },

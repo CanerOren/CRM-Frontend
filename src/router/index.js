@@ -4,6 +4,23 @@ import VueRouter from 'vue-router'
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 /* CORE */
+import customerRequestStatuses from '@/router/routes/Admin/Defines/CustomerRequestStatuses/customerRequestStatuses'
+import cities from '@/router/routes/Admin/Defines/Cities/Cities'
+import customerRequestImportances from '@/router/routes/Admin/Defines/CustomerRequestImportances/CustomerRequestImportances'
+import customerRequestSubjects from '@/router/routes/Admin/Defines/CustomerRequestSubjects/CustomerRequestSubjects'
+import customerRequestTypes from '@/router/routes/Admin/Defines/CustomerRequestTypes/CustomerRequestTypes'
+import customerTypes from '@/router/routes/Admin/Defines/CustomerTypes/CustomerTypes'
+import districts from '@/router/routes/Admin/Defines/Districts/Districts'
+import meetingContactTypes from '@/router/routes/Admin/Defines/MeetingContactTypes/MeetingContactTypes'
+import meetingStatuses from '@/router/routes/Admin/Defines/MeetingStatuses/MeetingSatuses'
+import meetingSubjects from '@/router/routes/Admin/Defines/MeetingSubjects/MeetingSubjects'
+import meetingTypes from '@/router/routes/Admin/Defines/MeetingTypes/MeetingTypes'
+import meetingLines from '@/router/routes/Admin/Data/MeetingLines/MeetingLines'
+import customers from '@/router/routes/Admin/Data/Customers/Customers'
+import meetings from '@/router/routes/Admin/Data/Meetings/Meetings'
+import customerRequests from './routes/Admin/Data/CustomerRequests/CustomerRequests'
+import adminTechSupport from './routes/Admin/Data/TechSupportAdmin/TechSupportAdmin'
+import userTechSupport from './routes/Admin/Data/TechSupportUser/TechSupportUser'
 import app from './routes/app'
 /* ADMIN:CORE */
 import users from './routes/Admin/Core/Users'
@@ -13,6 +30,8 @@ import smtpConfig from './routes/Admin/Core/Configs'
 /* ADMIN:APP */
 import configs from './routes/Admin/App/Configs'
 import productCategories from './routes/Admin/App/Product_categories'
+
+/* ADMIN:FIELDS */
 
 Vue.use(VueRouter)
 
@@ -30,6 +49,23 @@ const router = new VueRouter({
     ...userTypes,
     ...productCategories,
     ...smtpConfig,
+    ...cities,
+    ...customerRequestImportances,
+    ...customerRequestSubjects,
+    ...customerRequestTypes,
+    ...customerTypes,
+    ...districts,
+    ...meetingContactTypes,
+    ...meetingStatuses,
+    ...meetingSubjects,
+    ...meetingTypes,
+    ...meetingLines,
+    ...customers,
+    ...meetings,
+    ...customerRequests,
+    ...customerRequestStatuses,
+    ...adminTechSupport,
+    ...userTechSupport,
     {
       path: '*',
       redirect: 'error-404',

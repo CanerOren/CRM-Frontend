@@ -3,18 +3,39 @@
     <template v-if="deleteAction && dataId">
       <b-dropdown
         split
-        text="Güncelle"
+        :text="primaryAction ? 'Görüntüle' : 'Güncelle' "
         variant="outline-primary"
         right
         size="sm"
-        @click="$router.push(editAction)"
+        @click="$router.push(primaryAction ? primaryAction : editAction)"
       >
-        <template #button-content>
+        <template
+          v-if="primaryAction"
+          #button-content
+        >
+          <feather-icon
+            icon="EyeIcon"
+          />
+          Görüntüle
+        </template>
+        <template
+          v-if="!primaryAction"
+          #button-content
+        >
           <feather-icon
             icon="EditIcon"
           />
           Güncelle
         </template>
+        <b-dropdown-item
+          v-if="editAction && primaryAction"
+          :to="editAction"
+        >
+          <feather-icon icon="EditIcon" />
+          <span class="align-middle ml-50">
+            Güncelle
+          </span>
+        </b-dropdown-item>
         <b-dropdown-item
           v-if="deleteAction && dataId"
           @click="deleteAction(dataId)"
@@ -48,12 +69,16 @@ export default {
     BDropdown, BDropdownItem, BButton,
   },
   props: {
+    primaryAction: {
+      type: String,
+      required: false,
+    },
     editAction: {
       type: String,
-      required: true,
+      required: false,
     },
     dataId: {
-      type: String,
+      type: Number,
       required: false,
       default: null,
     },

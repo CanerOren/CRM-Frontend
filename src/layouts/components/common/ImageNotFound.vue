@@ -4,25 +4,31 @@
   >
     <div class="text-center">
       <div class="p-1">
-        <FeatherIcon icon="ImageIcon" size="24" class="text-muted" />
+        <FeatherIcon
+          icon="ImageIcon"
+          size="24"
+          class="text-muted"
+        />
       </div>
-      <div class="text-muted font-small-2">Görsel Bulunamadı</div>
+      <div class="text-muted font-small-2">
+        Görsel Bulunamadı
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ImageNotFound",
+  name: 'ImageNotFound',
   props: {
     widthSize: {
       type: String,
-      default: "w-100",
+      default: 'w-100',
     },
     heightSize: {
       type: String,
-      default: "height-100",
+      default: 'height-100',
     },
   },
-};
+}
 </script>

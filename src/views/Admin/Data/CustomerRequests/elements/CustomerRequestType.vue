@@ -1,18 +1,19 @@
 <template>
   <b-form-group
-    label="Hesap Durumu"
-    label-for="status"
+    label="Müşteri Tipi"
+    label-for="id_customer_request_types"
   >
     <validation-provider
       #default="{ errors }"
-      name="Hesap Durumu"
+      name="Müşteri Tipi"
       rules="required"
     >
       <v-select
-        v-model="dataItem.status"
-        :options="statuses"
+        id="id_customer_request_types"
+        v-model="dataItem.id_customer_request_types"
+        :options="customerRequestTypes"
         label="title"
-        :reduce="status => status.id"
+        :reduce="type => type.id"
         placeholder="Seçiniz"
       />
       <small class="text-danger">{{ errors[0] }}</small>
@@ -29,7 +30,7 @@ import { required } from '@validations'
 import vSelect from 'vue-select'
 
 export default {
-  name: 'UserType',
+  name: 'CustomerRequestType',
   components: {
     BFormGroup,
     vSelect,
@@ -38,22 +39,29 @@ export default {
   data() {
     return {
       required,
-      statuses: [{
-        id: '1',
-        title: 'Aktif',
-      }, {
-        id: '0',
-        title: 'Pasif',
-      }],
     }
   },
   computed: {
     dataItem() {
-      return this.$store.getters['users/dataItem']
+      return this.$store.getters['customerRequests/dataItem']
+    },
+    customerRequestTypes() {
+      return this.$store.getters['customerRequestTypes/dataList']
     },
   },
   created() {
+    this.getCustomerRequestTypes()
     localize('tr')
+  },
+  methods: {
+    getCustomerRequestTypes() {
+      this.$store.dispatch('customerRequestTypes/getDataList', {
+        select: {
+          id: true,
+          title: true,
+        },
+      })
+    },
   },
 }
 </script>

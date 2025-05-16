@@ -10,20 +10,21 @@
       </b-row>
     </b-card>
     <div
-      v-for="(ability,key) in abilities"
+      v-for="(ability,key) in dataItem.user_type_ability"
       :key="key"
     >
-      <b-card :title="ability.main_group">
+      <b-card :title="ability.ability_group">
         <b-card-sub-title class="mt-n1 mb-1">
           Yetkilendirme
         </b-card-sub-title>
         <b-list-group>
           <b-list-group-item
-            v-for="(subgroup,subkey) in ability.subgroups"
+            v-for="(subgroup,subkey) in ability.sub_groups
+            "
             :key="subkey"
           >
             <div class="font-weight-bold text-primary">
-              {{ subgroup.subgroup }}
+              {{ subgroup.sub_group }}
             </div>
             <b-row>
               <b-col
@@ -33,8 +34,7 @@
                 md="4"
               >
                 <b-form-checkbox
-                  v-model="dataItem.user_type_ability"
-                  :value="item.id"
+                  v-model="item.checked"
                 >
                   {{ item.title }}
                 </b-form-checkbox>
@@ -66,19 +66,8 @@ export default {
     TitleName,
   },
   computed: {
-    abilities() {
-      return this.$store.getters['abilities/dataList']
-    },
     dataItem() {
       return this.$store.getters['userTypes/dataItem']
-    },
-  },
-  created() {
-    this.getAbilities()
-  },
-  methods: {
-    getAbilities() {
-      this.$store.dispatch('abilities/getDataList')
     },
   },
 }

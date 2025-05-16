@@ -42,6 +42,7 @@ export default {
         this.showToast({
           variant: 'success', title: 'İşlem Başarılı!', icon: 'CheckIcon', text: val.message,
         })
+        this.$router.push('/admin/user-types')
       } else if (val.status === false) {
         this.showToast({
           variant: 'danger', title: 'İşlem Hatası!', icon: 'XIcon', text: val.message,

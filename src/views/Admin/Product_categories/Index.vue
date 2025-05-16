@@ -62,7 +62,6 @@ import {
 import ListButtons from '@/layouts/components/common/ListButtons.vue'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
-const tableName = 'product_categories'
 export default {
   name: 'Index',
   components: {
@@ -92,8 +91,6 @@ export default {
       ],
       dataQuery: {
         select: [
-          `${tableName}.id AS id`,
-          `${tableName}.title AS title`,
         ],
         limit: this.$store.state.app.perPage,
         start: 0,
