@@ -27,12 +27,6 @@
         cols="12"
         md="6"
       >
-        <password-checkbox />
-      </b-col>
-      <b-col
-        cols="12"
-        md="6"
-      >
         <user-type />
       </b-col>
       <b-col
@@ -54,12 +48,10 @@ import UserEmail from '@/views/Admin/Users/elements/UserEmail.vue'
 import UserPassword from '@/views/Admin/Users/elements/UserPassword.vue'
 import UserType from '@/views/Admin/Users/elements/UserType.vue'
 import UserLastName from '@/views/Admin/Users/elements/UserLastName.vue'
-import PasswordCheckbox from '@/views/Admin/Users/elements/checkBox.vue'
 
 export default {
   name: 'UserForm',
   components: {
-    PasswordCheckbox,
     UserLastName,
     BCard,
     BRow,

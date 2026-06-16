@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 /* Theme Core */
+import carEvaluation from '@/store/Admin/Data/CarEvaluation/carEvaluation'
 import cities from '@/store/Admin/Defines/Cities/cities'
 import customerRequestImportances from '@/store/Admin/Defines/CustomerRequestImportances/customerRequestImportances'
 import customerRequestSubjects from '@/store/Admin/Defines/CustomerRequestSubjects/customerRequestSubjects'
@@ -61,6 +62,7 @@ export default new Vuex.Store({
     customerRequests,
     customerRequestLines,
     customerRequestStatuses,
+    carEvaluation,
   },
   strict: process.env.DEV,
 })

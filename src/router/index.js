@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 /* CORE */
+import carEvaluation from '@/router/routes/Admin/Data/CarEvaluation/CarEvaluation'
 import customerRequestStatuses from '@/router/routes/Admin/Defines/CustomerRequestStatuses/customerRequestStatuses'
 import cities from '@/router/routes/Admin/Defines/Cities/Cities'
 import customerRequestImportances from '@/router/routes/Admin/Defines/CustomerRequestImportances/CustomerRequestImportances'
@@ -66,6 +67,7 @@ const router = new VueRouter({
     ...customerRequestStatuses,
     ...adminTechSupport,
     ...userTechSupport,
+    ...carEvaluation,
     {
       path: '*',
       redirect: 'error-404',

@@ -52,6 +52,13 @@ export default [
     ],
   },
   {
+    title: 'Araç Değerlendirme',
+    route: 'CarEvaluation',
+    icon: 'DollarSignIcon',
+    resource: 'ADMIN_CAR_EVALUATION_LIST',
+    action: 'read',
+  },
+  {
     title: 'Tanımlamalar',
     route: 'Fields',
     icon: 'CodesandboxIcon',
