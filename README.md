@@ -121,3 +121,4 @@ localStorage.
 ## License
 
 Private / proprietary. Built on the Vuexy template, which is subject to its own license.
+ 
